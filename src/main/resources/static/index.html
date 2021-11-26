@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple example - Editor.md examples</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/editormd.css" />
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/commons.css">
+    </head>
+    <body>
+        <div id="layout">
+            <header>
+                <h1>Article Publish</h1>
+                <input id="md-id" type="hidden">
+              <label for="md-title">Title:</label><input id="md-title" class="md-title-class" type="text" value="simple title">
+                <span id="js-submit" class="btn">submit</span>
+            </header>
+            <div id="test-editormd">
+                <textarea style="display:none;">[TOC]
+
+#### Disabled options
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+- HTML tags decode;
+- Flowchart and Sequence Diagram;
+
+#### Editor.md directory
+
+    editor.md/
+            lib/
+            css/
+            scss/
+            tests/
+            fonts/
+            images/
+            plugins/
+            examples/
+            languages/     
+            editormd.js
+            ...
+#### Syntax
+
+    ```seq
+    .........
+    ```
+
+    # or
+
+    ```sequence
+    .........
+    ```
+
+#### sequence
+
+```seq
+A->B: Message
+B->C: Message
+C->A: Message
+```
+
+```sequence
+Andrew->China: Says Hello
+Note right of China: China thinks\nabout it
+China-->Andrew: How are you?
+Andrew->>China: I am good thanks!
+```
+
+#### FlowChart
+```flow
+st=>start: User login
+op=>operation: Operation
+cond=>condition: Successful Yes or No?
+e=>end: Into admin
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+
+#### TaskList
+
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported;
+- [x] list syntax required (any unordered or ordered list supported);
+- [x] this is a complete item;
+- [ ] this is an incomplete item [test link](#);
+- [ ] this is an incomplete item;
+    - [ ] this is an incomplete item [test link](#);
+    - [ ] this is an incomplete item [test link](#);
+- [x] list syntax required (any unordered or ordered list supported);
+- [x] this is a complete item;
+- [ ] this is an incomplete item [test link](#);
+- [ ] this is an incomplete item;
+    - [ ] this is an incomplete item [test link](#);
+- [x] list syntax required (any unordered or ordered list supported);
+- [x] this is a complete item;
+- [ ] this is an incomplete item [test link](#);
+- [ ] this is an incomplete item;
+    - [ ] this is an incomplete item [test link](#);
+    - [ ] this is an incomplete item [test link](#);
+
+> Github Flavored Markdown task lists
+</textarea>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="lib/marked.min.js"></script>
+        <script src="lib/prettify.min.js"></script>
+        <script src="lib/raphael.min.js"></script>
+        <script src="lib/underscore.min.js"></script>
+        <script src="lib/sequence-diagram.min.js"></script>
+        <script src="lib/flowchart.min.js"></script>
+        <script src="lib/jquery.flowchart.min.js"></script>
+        <script src="js/uploadImg.js" type="text/javascript"></script>
+        <script src="js/common.js" type="text/javascript"></script>
+
+
+        <script src="js/editormd.js"></script>
+        <script type="text/javascript">
+			var testEditor;
+
+            $(function() {
+                testEditor = editormd("test-editormd", {
+                    width   : "90%",
+                    height  : 640,
+                    syncScrolling : "single",
+                    path    : "lib/",
+                    flowChart : true,
+                    sequenceDiagram : true,
+                    taskList : true ,
+                    imageUpload    : true,
+                    saveHTMLToTextarea: true,
+                    imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    imageUploadURL : "/api/v1/image/upload",
+                    onload : function() {
+                      initPasteDragImg(this);
+                    }
+                });
+
+              $("#js-submit").bind('click', function(){
+                submit();
+              });
+            });
+
+            function submit(){
+              $.ajax({
+                url: addPost,
+                type:"POST",
+                data: JSON.stringify(getData()),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(success){
+                  if (success.code !== 200){
+                    alert("save article failed");
+                  }
+                  alert("save article" + success.message + "success");
+                }});
+            }
+
+            function getData(){
+              var markdown = testEditor.getMarkdown();
+              var html = testEditor.getHTML();
+              var title = $("#md-title").val();
+              var id = $("#md-id").val();
+              if (title === "") {
+                alert("please add title for article!");
+                return;
+              }
+              return  {
+                id: id,
+                title: title,
+                content: html,
+                originContent: markdown
+              };
+            }
+        </script>
+    </body>
+</html>
