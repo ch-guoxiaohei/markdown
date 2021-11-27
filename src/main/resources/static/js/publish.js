@@ -43,25 +43,3 @@ function validSubmit(data) {
   }
   return true;
 }
-
-function loadArticleById(articleId) {
-  var url = articles + "/" + articleId;
-  $.ajax({
-    url: url,
-    type: "GET",
-    async: false,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function (success) {
-      if (success.code !== 200) {
-        alert("load article failed!!!");
-        return;
-      }
-      var data = success.data;
-      $("#test-editormd textarea").val(data.originContent);
-      $("#md-title").val(data.title);
-      $("#md-id").val(data.id);
-      $("#md-edit-id-overview").val(data.overview);
-    }
-  });
-}

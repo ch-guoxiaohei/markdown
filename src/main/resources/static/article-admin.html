@@ -48,10 +48,14 @@
        </ul>
         <div class="md-index-content-footer">
           <div class="md-index-content-folder-page">
-            <a href="#">
-              下一页
+            <a href="javascript:void(0)" onclick="nextPage()">
+              next page
             </a>
-            <input type="hidden" value="1" id="md-hidden-page"/>
+            <a href="javascript:void(0)" onclick="prePage()">
+              pre page
+            </a>
+            <input type="hidden" value="0" id="md-hidden-page"/>
+            <input type="hidden" value="0" id="md-hidden-total-page"/>
           </div>
         </div>
       </div>
@@ -61,10 +65,11 @@
   </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/manage.js"></script>
 <script type="text/javascript">
   $(function(){
     loadCategory();
-    loadArticle();
+    loadArticleByAdmin();
     bindClick();
   });
 </script>

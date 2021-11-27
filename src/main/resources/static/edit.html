@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="utf-8"/>
-  <title>Simple example - Editor.md examples</title>
+  <title>Edit Post</title>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="css/editormd.css"/>
   <link rel="stylesheet" href="css/index.css">
@@ -11,7 +11,7 @@
 <body>
 <div id="layout">
   <header>
-    <h1>Article Publish</h1>
+    <h1>Article Edit</h1>
     <input id="md-id" type="hidden">
     <select id="md-id-select" class="md-select">
       <option value="default">default</option>
@@ -21,9 +21,8 @@
     <span id="js-submit" class="btn">submit</span>
   </header>
   <div class="md-edit-overview-box">
-    <textarea class="md-edit-overview" id="md-edit-id-overview" placeholder="please input overivew">
-
-    </textarea>
+    <textarea class="md-edit-overview" id="md-edit-id-overview"
+              placeholder="please input overivew"></textarea>
   </div>
   <div id="test-editormd">
                 <textarea style="display:none;">[TOC]
@@ -151,6 +150,9 @@ cond(no)->op
     $("#js-submit").bind('click', function () {
       submit(addPost);
     });
+    var articleId = getQueryParam("articleId");
+    loadArticleById(articleId);
+
   });
 </script>
 </body>
