@@ -3,6 +3,8 @@ package com.guoxiaohei.markdown.api;
 import com.guoxiaohei.markdown.model.common.ResponseResult;
 import com.guoxiaohei.markdown.model.projo.Article;
 import com.guoxiaohei.markdown.service.ArticleService;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,11 +23,9 @@ public class ArticleApi {
 
   private ArticleService articleService;
 
-
   public ArticleApi(@Autowired ArticleService articleService) {
     this.articleService = articleService;
   }
-
 
   @PostMapping(value = "article", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseResult insertArticle(@RequestBody Article article) {
@@ -42,11 +43,14 @@ public class ArticleApi {
         .message(articleService.updateArticle(article)).build();
   }
 
-
   @GetMapping(value = "article", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseResult findAll() {
+  public ResponseResult page(@RequestParam("categoryId") String categoryId,
+      @RequestParam(value = "`") String search,
+      @RequestParam("page") int page,
+      @RequestParam("pageSize") int pageSize) {
+    String decode = URLDecoder.decode(search, StandardCharsets.UTF_8);
     return ResponseResult.builder().code(HttpStatus.OK.value()).message("success")
-        .data(articleService.selectAll()).build();
+        .data(articleService.pageArticle(categoryId, decode, page, pageSize)).build();
   }
 
   @GetMapping(value = "article/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

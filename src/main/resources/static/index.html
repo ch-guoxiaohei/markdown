@@ -14,7 +14,7 @@
       </div>
       <div class="md-index-header-navigator">
         <ul>
-          <li><a href="#">首页</a></li>
+          <li><a href="/">首页</a></li>
           <li><a href="#">后台管理</a></li>
         </ul>
       </div>
@@ -23,9 +23,17 @@
     <div class="md-index-content">
       <div class="md-index-content-main">
         <div class="md-operation">
-          search && cato
+          <div class="md-operation-select">
+            <select id="md-id-select">
+              <option value="default">default</option>
+            </select>
+          </div>
+          <div class="md-operation-search">
+            <input id="md-search" type="text" placeholder="please input search title or content"/>
+            <span id="md-search-span">search</span>
+          </div>
         </div>
-       <ul>
+       <ul id="md-article-ul">
          <li>
            <div>
              <span class="md-index-content-title">title</span>
@@ -92,6 +100,7 @@
             <a href="#">
               下一页
             </a>
+            <input type="hidden" value="1" id="md-hidden-page"/>
           </div>
         </div>
       </div>
@@ -99,6 +108,14 @@
     <div class="clear"></div>
 
   </div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+  $(function(){
+    loadCategory();
+    loadArticle();
+    bindClick();
+  });
+</script>
 </body>
 </html>

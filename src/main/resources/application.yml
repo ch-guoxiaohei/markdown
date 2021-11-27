@@ -26,12 +26,13 @@ spring:
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.classpath}
-mybatis:
-  mapperLocations: classpath:mybatis/*.xml
-  config-location: classpath:mybatis-config.xml
-  typeAliasesPackage: com.guoxiaohei.markdown.model.projo
 logging:
   level:
     root: info
     org.mybatis: debug
     com.guoxiaohei: debug
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

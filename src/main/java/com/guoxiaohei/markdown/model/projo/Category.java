@@ -12,35 +12,20 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @ToString
+@Table(name = "t_category")
 @Entity
-@Table(name = "t_post")
-@NoArgsConstructor
-@AllArgsConstructor
-public class Article {
+public class Category {
 
   @Id
-  @Column(name = "c_id", length = 32)
+  @Column(name = "c_id" ,length = 32)
   private String id;
 
-  @Column(name = "c_title", length = 300)
-  private String title;
-
-  @Column(name = "c_overview", length = 300)
-  private String overview;
-
-  @Column(name = "c_content")
-  private String content;
-
-  @Column(name = "c_origin_content")
-  private String originContent;
-
-  @Column(name = "c_category_id")
-  private String categoryId;
-
-  @Column(name = "c_user_id")
-  private String userId;
+  @Column(name = "c_name" , length = 300)
+  private String name;
 
   @Column(name = "dt_create_time")
   private Date createTime;
