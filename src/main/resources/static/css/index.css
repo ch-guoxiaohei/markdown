@@ -106,6 +106,7 @@
   height: inherit;
   -webkit-transition: all .3s;
   transition: all .3s;
+  cursor: pointer;
 }
 
 .md-operation {
@@ -248,7 +249,7 @@ span.md-index-content-title:before {
   border-radius: 4px;
   text-decoration: none;
   color: #515a6e;
-  width: 44px;
+  width: 70px;
   padding: 5px;
   float: right;
   font-size: 14px;

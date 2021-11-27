@@ -1,6 +1,5 @@
 package com.guoxiaohei.markdown.service;
 
-import com.github.pagehelper.PageHelper;
 import com.guoxiaohei.markdown.dao.ArticleRepository;
 import com.guoxiaohei.markdown.model.projo.Article;
 import com.guoxiaohei.markdown.utils.UuIdUtil;
@@ -11,6 +10,9 @@ import javax.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
@@ -51,13 +53,14 @@ public class ArticleService {
     return articleRepository.findById(id).orElseGet(Article::new);
   }
 
-  public List<Article> pageArticle(String category, String search, int pageNum, int pageSize) {
+  public Page pageArticle(String category, String search, int pageNum, int pageSize) {
     log.info("search category : {}", category);
     log.info("like key : {}", search);
     category = "default".equals(category) ? "" : category;
-    PageHelper.startPage(pageNum, pageSize);
     Specification<Article> specification = buildQueryCondition(category, search);
-    return articleRepository.findAll(specification, Sort.by(Direction.DESC, "createTime"));
+    Pageable pageable = PageRequest
+        .of(pageNum, pageSize, Sort.by(Direction.DESC, "createTime"));
+    return articleRepository.findAll(specification, pageable);
   }
 
   private Specification<Article> buildQueryCondition(String category, String search) {

@@ -31,8 +31,3 @@ logging:
     root: info
     org.mybatis: debug
     com.guoxiaohei: debug
-pagehelper:
-  helper-dialect: h2
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql

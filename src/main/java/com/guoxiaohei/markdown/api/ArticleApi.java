@@ -45,7 +45,7 @@ public class ArticleApi {
 
   @GetMapping(value = "article", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseResult page(@RequestParam("categoryId") String categoryId,
-      @RequestParam(value = "`") String search,
+      @RequestParam(value = "search") String search,
       @RequestParam("page") int page,
       @RequestParam("pageSize") int pageSize) {
     String decode = URLDecoder.decode(search, StandardCharsets.UTF_8);

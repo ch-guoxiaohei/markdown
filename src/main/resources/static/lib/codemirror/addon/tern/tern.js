@@ -690,7 +690,7 @@
       pending = {};
     };
 
-    this.addFile = function(name, text) { send({type: "add", name: name, text: text}); };
+    this.addFile = function(name, text) { send({type: "static.add", name: name, text: text}); };
     this.delFile = function(name) { send({type: "del", name: name}); };
     this.request = function(body, c) { send({type: "req", body: body}, c); };
   }

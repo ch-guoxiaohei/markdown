@@ -4531,7 +4531,7 @@
   // are left alone.
   function indentLine(cm, n, how, aggressive) {
     var doc = cm.doc, state;
-    if (how == null) how = "add";
+    if (how == null) how = "static.add";
     if (how == "smart") {
       // Fall back to "prev" when the mode doesn't have an indentation
       // method.
@@ -4556,7 +4556,7 @@
     if (how == "prev") {
       if (n > doc.first) indentation = countColumn(getLine(doc, n-1).text, null, tabSize);
       else indentation = 0;
-    } else if (how == "add") {
+    } else if (how == "static.add") {
       indentation = curSpace + cm.options.indentUnit;
     } else if (how == "subtract") {
       indentation = curSpace - cm.options.indentUnit;
@@ -4761,7 +4761,7 @@
     indentLine: methodOp(function(n, dir, aggressive) {
       if (typeof dir != "string" && typeof dir != "number") {
         if (dir == null) dir = this.options.smartIndent ? "smart" : "prev";
-        else dir = dir ? "add" : "subtract";
+        else dir = dir ? "static.add" : "subtract";
       }
       if (isLine(this.doc, n)) indentLine(this, n, dir, aggressive);
     }),
@@ -5505,7 +5505,7 @@
     delGroupBefore: function(cm) {cm.deleteH(-1, "group");},
     delGroupAfter: function(cm) {cm.deleteH(1, "group");},
     indentAuto: function(cm) {cm.indentSelection("smart");},
-    indentMore: function(cm) {cm.indentSelection("add");},
+    indentMore: function(cm) {cm.indentSelection("static.add");},
     indentLess: function(cm) {cm.indentSelection("subtract");},
     insertTab: function(cm) {cm.replaceSelection("\t");},
     insertSoftTab: function(cm) {
@@ -5518,7 +5518,7 @@
       cm.replaceSelections(spaces);
     },
     defaultTab: function(cm) {
-      if (cm.somethingSelected()) cm.indentSelection("add");
+      if (cm.somethingSelected()) cm.indentSelection("static.add");
       else cm.execCommand("insertTab");
     },
     transposeChars: function(cm) {

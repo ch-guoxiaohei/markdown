@@ -22,7 +22,7 @@ CodeMirror.defineMode("apl", function() {
     "⍣": "power"
   };
   var builtInFuncs = {
-    "+": ["conjugate", "add"],
+    "+": ["conjugate", "static.add"],
     "−": ["negate", "subtract"],
     "×": ["signOf", "multiply"],
     "÷": ["reciprocal", "divide"],
