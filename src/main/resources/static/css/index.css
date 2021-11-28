@@ -324,6 +324,7 @@ span.md-index-content-title:before {
   color: #ccc;
   font-size: 18px;
   font-weight: bold;
+  clear: both;
 }
 .md-edit {
   border: 1px solid #314659;

@@ -2,11 +2,13 @@ package com.guoxiaohei.markdown.service;
 
 import com.guoxiaohei.markdown.dao.ArticleRepository;
 import com.guoxiaohei.markdown.model.projo.Article;
+import com.guoxiaohei.markdown.utils.JpaBeanUtils;
 import com.guoxiaohei.markdown.utils.UuIdUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import javax.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -44,8 +46,11 @@ public class ArticleService {
 
   @Transactional(rollbackFor = Exception.class)
   public String updateArticle(Article article) {
-    article.setUpdateTime(new Date());
-    articleRepository.saveAndFlush(article);
+    Optional<Article> optional = articleRepository.findById(article.getId());
+    if (optional.isPresent()) {
+      JpaBeanUtils.copyNullProperties(article, optional.get());
+      articleRepository.saveAndFlush(optional.get());
+    }
     return article.getId();
   }
 
