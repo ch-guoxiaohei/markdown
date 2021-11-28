@@ -13,7 +13,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
   display:block;
 }
 ol,ul,li {
-  list-style:none;
+  /*list-style:none;*/
 }
 blockquote,q {
   quotes:none;
