@@ -15,22 +15,22 @@ function getData() {
   };
 }
 
-function submit(addPost) {
+function submit(addPost, articleId) {
   if (!validSubmit(getData())) {
     alert("please add title or overview for article!");
     return;
   }
   $.ajax({
-    url: addPost,
+    url: addPost + "/" + articleId,
     type: "POST",
     data: JSON.stringify(getData()),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (success) {
       if (success.code !== 200) {
-        alert("save article failed");
+        alert("Update Article Failed");
       }
-      alert("save article success");
+      alert("Update Article Successful");
       $("#md-title").val('');
       $("#md-edit-id-overview").val('');
     }
@@ -61,6 +61,11 @@ function loadArticleById(articleId) {
       $("#test-editormd textarea").val(data.originContent);
       $("#md-title").val(data.title);
       $("#md-id").val(data.id);
+      $("#md-id-select option").each(function (index, item) {
+        if (data.categoryId === $(item).val()) {
+          $(item).attr("selected", "true");
+        }
+      });
       $("#md-edit-id-overview").val(data.overview);
     }
   });

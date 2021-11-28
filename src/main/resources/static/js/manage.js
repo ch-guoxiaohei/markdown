@@ -1,6 +1,8 @@
 var pageQuery = $("#md-hidden-page");
 var pageTotal = $("#md-hidden-total-page");
-var pageSize = 1;
+var pageBox = $(".md-index-content-folder-page");
+var articleMain = $('#md-article-ul');
+var pageSize = 6;
 
 function bindClick() {
   $("#md-search-span").bind("click", function (event) {
@@ -53,21 +55,65 @@ function loadArticleByAdmin() {
         alert("load article failed!!!");
         return;
       }
-      $('#md-article-ul').empty();
+      articleMain.empty();
+      if (success.data.content.length === 0) {
+        articleMain.append("<p class='md-no-content'>No Data At This Time</p>");
+        pageBox.hide();
+        return;
+      }
       setPage(success.data.totalPages, success.data.pageable.pageNumber);
       success.data.content.forEach(function (item) {
         var overview = item.overview;
         var title = item.title;
         var id = item.id;
-        var content = "<li><div><span class='md-index-content-title'>" + title
+        var bindId = "delete_" + id;
+        var categoryName = "";
+        if (categoryMap[item.categoryId] !== undefined) {
+          categoryName = "【" + categoryMap[item.categoryId] + "】";
+        }
+        var content = "<li><div><span class='md-index-content-title'>"
+            + categoryName + title
             + "</span>" +
-            "<div class='md-index-content-overview' ><p>" + overview
+            "<div class='md-index-content-overview' ><p>" + overview + "【"
+            + item.createTime + "】"
             + "</p></div>" +
             "<a href='/edit.html?articleId=" + id
-            + "' class='md-read-more'> edit</a>" +
+            + "' class='md-edit'> edit</a>" +
+            "<a class='md-delete' href='javascript:void(0)' id='" + bindId
+            + "'>delete</a>" +
             "</div></li>";
-        $('#md-article-ul').append(content);
+        articleMain.append(content);
+        $("#" + bindId).bind('click', function () {
+          deleteArticle(id);
+        });
       });
     }
   });
+}
+
+function deleteArticle(id) {
+  var status = confirm("do you delete this article？");
+  if (status) {
+    console.log("delete " + id);
+    var url = articleDel + "/" + id;
+    $.ajax({
+      url: url,
+      type: "GET",
+      async: false,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (success) {
+        if (success.code !== 200) {
+          alert("Delete article failed!!!");
+          return;
+        }
+        var data = success.data;
+        if (data === "") {
+          alert("This Article was not exist!");
+          return;
+        }
+        loadArticleByAdmin();
+      }
+    });
+  }
 }

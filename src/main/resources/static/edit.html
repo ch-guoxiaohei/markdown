@@ -18,7 +18,8 @@
     </select>
     <input id="md-title" class="md-title-class" type="text"
            placeholder="please input search title">
-    <span id="js-submit" class="btn">submit</span>
+    <span id="js-submit" class="md-btn">submit</span>
+    <a href="article-admin.html" class="md-btn">return manager index</a>
   </header>
   <div class="md-edit-overview-box">
     <textarea class="md-edit-overview" id="md-edit-id-overview"
@@ -147,11 +148,12 @@ cond(no)->op
         initPasteDragImg(this);
       }
     });
-    $("#js-submit").bind('click', function () {
-      submit(addPost);
-    });
     var articleId = getQueryParam("articleId");
     loadArticleById(articleId);
+    $("#js-submit").bind('click', function () {
+      submit(addPost,articleId);
+    });
+
 
   });
 </script>

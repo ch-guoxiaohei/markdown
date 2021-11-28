@@ -1,6 +1,10 @@
 var addPost = "/api/v1/article";
 var category = "/api/v1/category";
 var articles = "/api/v1/article";
+var articleDel= "/api/v1/articleDel";
+var categoryMap = {};
+
+
 
 function getQueryParam(key) {
   if (!key) {
@@ -39,6 +43,7 @@ function loadCategory() {
       selectCategory.empty();
       selectCategory.append("<option value='default'>default</option>");
       success.data.forEach(function (item) {
+        categoryMap[item.id] = item.name;
         $("#md-id-select").append(
             "<option value='" + item.id + "'>" + item.name + "</option>")
       });

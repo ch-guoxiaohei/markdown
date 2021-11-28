@@ -28,9 +28,9 @@ function submit(addPost) {
     dataType: "json",
     success: function (success) {
       if (success.code !== 200) {
-        alert("save article failed");
+        alert("Save Article Failed");
       }
-      alert("save article success");
+      alert("Save Article Successful");
       $("#md-title").val('');
       $("#md-edit-id-overview").val('');
     }

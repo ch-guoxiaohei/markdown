@@ -59,4 +59,10 @@ public class ArticleApi {
         .data(articleService.findById(id)).build();
   }
 
+  @GetMapping(value = "articleDel/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseResult deleteById(@PathVariable("id") String id) {
+    return ResponseResult.builder().code(HttpStatus.OK.value()).message("success")
+        .data(articleService.deleteById(id)).build();
+  }
+
 }

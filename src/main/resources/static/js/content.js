@@ -14,7 +14,15 @@ function getArticle(articleId) {
       var data = success.data;
       $("#md-content-title").html(data.title);
       $("#md-content-overview").html(data.overview);
-      $("#md-content-html").html(data.content);
+      $("#editormd-view textarea").val(data.originContent);
+      var editormdView = editormd.markdownToHTML("editormd-view", {
+        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+        emoji           : true,
+        taskList        : true,
+        tex             : true,  // 默认不解析
+        flowChart       : true,  // 默认不解析
+        sequenceDiagram : true,  // 默认不解析
+      });
     }
   });
 }

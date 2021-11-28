@@ -6,6 +6,7 @@ import com.guoxiaohei.markdown.utils.UuIdUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -53,6 +54,15 @@ public class ArticleService {
     return articleRepository.findById(id).orElseGet(Article::new);
   }
 
+  public String deleteById(String id) {
+    Article exist = findById(id);
+    if (Objects.nonNull(exist)) {
+      articleRepository.deleteById(id);
+      return exist.getId();
+    }
+    return StringUtils.EMPTY;
+  }
+
   public Page pageArticle(String category, String search, int pageNum, int pageSize) {
     log.info("search category : {}", category);
     log.info("like key : {}", search);
@@ -70,6 +80,7 @@ public class ArticleService {
       if (StringUtils.isNotBlank(search)) {
         orLikeQuery.add(criteriaBuilder.like(root.get("title"), "%" + search + "%"));
         orLikeQuery.add(criteriaBuilder.like(root.get("content"), "%" + search + "%"));
+        orLikeQuery.add(criteriaBuilder.like(root.get("overview"), "%" + search + "%"));
         predicates.add(criteriaBuilder.or(orLikeQuery.toArray(new Predicate[0])));
       }
       if (StringUtils.isNotBlank(category)) {
