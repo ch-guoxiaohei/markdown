@@ -9,7 +9,9 @@ public class BootSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    super.configure(http);
+    http.authorizeRequests().antMatchers("/").permitAll().and()
+        .authorizeRequests().antMatchers("/console/**").permitAll();
     http.csrf().disable();
+    http.headers().frameOptions().disable();
   }
 }
