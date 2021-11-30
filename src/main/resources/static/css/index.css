@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-.md-btn:hover{
+.md-btn:hover {
   color: #F58EA8;
 }
 
@@ -95,14 +95,14 @@
 .md-index-header-navigator ul {
   min-height: 30px;
   float: left;
-  list-style:none;
+  list-style: none;
 }
 
 .md-index-header-navigator ul li {
   float: left;
   position: relative;
   margin: 0 20px 0 20px;
-  list-style:none;
+  list-style: none;
 }
 
 .md-index-header-navigator ul li a {
@@ -192,6 +192,8 @@
   display: block;
   height: 140px;
   margin: 10px 0 10px 0;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px rgb(202 203 203 / 50%);
 }
 
 .md-index-content-main ul li span.md-index-content-title {
@@ -318,7 +320,7 @@ span.md-index-content-title:before {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
 }
 
-.md-no-content{
+.md-no-content {
   text-indent: 7px;
   text-align: center;
   height: 500px;
@@ -328,6 +330,7 @@ span.md-index-content-title:before {
   font-weight: bold;
   clear: both;
 }
+
 .md-edit {
   border: 1px solid #314659;
   padding: 2px 9px;
@@ -338,9 +341,11 @@ span.md-index-content-title:before {
   float: left;
   color: #314659;
 }
+
 .md-edit:after {
   content: '»';
 }
+
 .md-edit:hover {
   color: #FF85B8 !important;
 }
@@ -357,19 +362,24 @@ span.md-index-content-title:before {
   margin-left: 20px;
 
 }
+
 .md-delete:after {
   content: '»';
 }
+
 .md-delete:hover {
   color: #FF85B8 !important;
 }
-.md-index-header-navigator ul li:hover{
-  border-bottom: 3px solid #F58EA8 ;
+
+.md-index-header-navigator ul li:hover {
+  border-bottom: 3px solid #F58EA8;
 }
-.md-index-content-folder-page a:hover{
+
+.md-index-content-folder-page a:hover {
   color: #F58EA8;
 }
-#md-search-span:hover{
+
+#md-search-span:hover {
   color: #F58EA8;
 }
 
@@ -378,4 +388,16 @@ input.md-title-class:focus {
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+}
+
+.md-index-content-box {
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgb(202 203 203 / 50%);
+}
+
+#md-content-overview {
+  padding: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  -webkit-box-shadow: 0 0 5px rgb(245 142 168 / 50%);
 }

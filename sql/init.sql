@@ -37,3 +37,6 @@ insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time)
 insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabcf7','Big Data',now(),now());
 insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabcf8','Life',now(),now());
 insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabcf9','Frontend',now(),now());
+insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabc11','Geek',now(),now());
+insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabc12','Algorithm',now(),now());
+insert into markdowneditor.t_category(c_id,c_name,dt_create_time,dt_update_time) values('83b2416c24414eb68098a9fae8fabc13','Design',now(),now());
