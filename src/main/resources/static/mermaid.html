@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>路漫漫其修远兮，吾将上下而求索</title>
+  <style>
+    .md-mermaid-link{
+      display: block;
+      text-align: center;
+      color: #333d53;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .md-mermaid-link:hover{
+      color: #3399CC;
+    }
+    .md-mermaid-box{
+      width: 960px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<a class="md-mermaid-link" target="_blank" href="https://mermaid-js.github.io/mermaid/#/n00b-syntaxReference?id=syntax-structure">mermaid-js</a>
+<div class="md-mermaid-box">
+  <div class="mermaid">
+    erDiagram
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER ||--o{ INVOICE : "liable for"
+    DELIVERY-ADDRESS ||--o{ ORDER : receives
+    INVOICE ||--|{ ORDER : covers
+    ORDER ||--|{ ORDER-ITEM : includes
+    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+    PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+  </div>
+  <div class="mermaid">
+    flowchart TD
+    Start --> Stop
+  </div>
+</div>
+
+<script src="js/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+</body>
+</html>
