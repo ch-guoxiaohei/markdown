@@ -31,8 +31,7 @@ function submit(addPost, articleId) {
         alert("Update Article Failed");
       }
       alert("Update Article Successful");
-      $("#md-title").val('');
-      $("#md-edit-id-overview").val('');
+      loadArticleById(articleId);
     }
   });
 }
