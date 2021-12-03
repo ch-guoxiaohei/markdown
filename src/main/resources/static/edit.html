@@ -26,93 +26,7 @@
               placeholder="please input overivew"></textarea>
   </div>
   <div id="test-editormd">
-                <textarea style="display:none;">[TOC]
-
-#### Disabled options
-
-- TeX (Based on KaTeX);
-- Emoji;
-- Task lists;
-- HTML tags decode;
-- Flowchart and Sequence Diagram;
-
-#### Editor.md directory
-
-    editor.md/
-            lib/
-            css/
-            scss/
-            tests/
-            fonts/
-            images/
-            plugins/
-            examples/
-            languages/     
-            editormd.js
-            ...
-#### Syntax
-
-    ```seq
-    .........
-    ```
-
-    # or
-
-    ```sequence
-    .........
-    ```
-
-#### sequence
-
-```seq
-A->B: Message
-B->C: Message
-C->A: Message
-```
-
-```sequence
-Andrew->China: Says Hello
-Note right of China: China thinks\nabout it
-China-->Andrew: How are you?
-Andrew->>China: I am good thanks!
-```
-
-#### FlowChart
-```flow
-st=>start: User login
-op=>operation: Operation
-cond=>condition: Successful Yes or No?
-e=>end: Into admin
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-
-#### TaskList
-
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported;
-- [x] list syntax required (any unordered or ordered list supported);
-- [x] this is a complete item;
-- [ ] this is an incomplete item [test link](#);
-- [ ] this is an incomplete item;
-    - [ ] this is an incomplete item [test link](#);
-    - [ ] this is an incomplete item [test link](#);
-- [x] list syntax required (any unordered or ordered list supported);
-- [x] this is a complete item;
-- [ ] this is an incomplete item [test link](#);
-- [ ] this is an incomplete item;
-    - [ ] this is an incomplete item [test link](#);
-- [x] list syntax required (any unordered or ordered list supported);
-- [x] this is a complete item;
-- [ ] this is an incomplete item [test link](#);
-- [ ] this is an incomplete item;
-    - [ ] this is an incomplete item [test link](#);
-    - [ ] this is an incomplete item [test link](#);
-
-> Github Flavored Markdown task lists
-</textarea>
+    <textarea style="display:none;"></textarea>
   </div>
 </div>
 <script src="js/jquery.min.js"></script>
@@ -131,6 +45,9 @@ cond(no)->op
   var testEditor;
   $(function () {
     loadCategory(category);
+    var articleId = getQueryParam("articleId");
+    loadArticleById(articleId);
+    bindSubmit(articleId);
     testEditor = editormd("test-editormd", {
       width: "90%",
       height: 640,
@@ -148,13 +65,6 @@ cond(no)->op
         initPasteDragImg(this);
       }
     });
-    var articleId = getQueryParam("articleId");
-    loadArticleById(articleId);
-    $("#js-submit").bind('click', function () {
-      submit(addPost,articleId);
-    });
-
-
   });
 </script>
 </body>

@@ -57,7 +57,9 @@ function loadArticleById(articleId) {
         return;
       }
       var data = success.data;
-      $("#test-editormd textarea").val(data.originContent);
+      var editArea = $("#test-editormd textarea");
+      editArea.empty();
+      editArea.text(data.originContent);
       $("#md-title").val(data.title);
       $("#md-id").val(data.id);
       $("#md-id-select option").each(function (index, item) {
@@ -67,5 +69,11 @@ function loadArticleById(articleId) {
       });
       $("#md-edit-id-overview").val(data.overview);
     }
+  });
+}
+
+function bindSubmit(articleId){
+  $("#js-submit").bind('click', function () {
+    submit(addPost, articleId);
   });
 }
