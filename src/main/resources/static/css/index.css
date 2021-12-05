@@ -196,14 +196,16 @@
   -webkit-box-shadow: 0 0 5px rgb(202 203 203 / 50%);
 }
 
-.md-index-content-main ul li span.md-index-content-title {
+.md-index-content-main ul li span.md-index-content-title a {
   vertical-align: middle;
   font-size: 20px;
   font-weight: 700;
   color: #2c3e50;
   font-family: "Consolas";
 }
-
+.md-index-content-main ul li span.md-index-content-title a:hover{
+  color: #F58EA8;
+}
 span.md-index-content-title:before {
   content: '✍';
 }
@@ -399,5 +401,4 @@ input.md-title-class:focus {
   padding: 20px;
   font-weight: bold;
   font-size: 16px;
-  -webkit-box-shadow: 0 0 5px rgb(245 142 168 / 50%);
 }

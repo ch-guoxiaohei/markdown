@@ -71,8 +71,9 @@ function loadArticleByAdmin() {
         if (categoryMap[item.categoryId] !== undefined) {
           categoryName = "【" + categoryMap[item.categoryId] + "】";
         }
-        var content = "<li><div><span class='md-index-content-title'>"
-            + categoryName + title
+        var content = "<li><div><span class='md-index-content-title'>" +
+            "<a target='_blank' href='/content.html?articleId=" + id + "'>" + categoryName
+            + title + "</a>"
             + "</span>" +
             "<div class='md-index-content-overview' ><p>" + overview + "【"
             + item.createTime + "】"
