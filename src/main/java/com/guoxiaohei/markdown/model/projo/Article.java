@@ -47,6 +47,9 @@ public class Article {
     @Column(name = "dt_update_time")
     private Date updateTime;
 
+    @Column(name = "deleted")
+    private String deleted;
+
     public String getTitle() {
         return title;
     }
@@ -117,6 +120,14 @@ public class Article {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     @Override

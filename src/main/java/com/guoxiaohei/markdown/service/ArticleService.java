@@ -1,6 +1,7 @@
 package com.guoxiaohei.markdown.service;
 
 import com.guoxiaohei.markdown.dao.ArticleRepository;
+import com.guoxiaohei.markdown.model.common.Constant;
 import com.guoxiaohei.markdown.model.projo.Article;
 import com.guoxiaohei.markdown.utils.JpaBeanUtils;
 import com.guoxiaohei.markdown.utils.UuIdUtil;
@@ -8,7 +9,6 @@ import com.guoxiaohei.markdown.utils.UuIdUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import jakarta.persistence.criteria.Predicate;
@@ -42,6 +42,7 @@ public class ArticleService {
         article.setId(id);
         article.setCreateTime(new Date());
         article.setUpdateTime(article.getCreateTime());
+        article.setDeleted(Constant.NOT_DELETED);
         articleRepository.saveAndFlush(article);
         return id;
     }
@@ -62,10 +63,13 @@ public class ArticleService {
     }
 
     public String deleteById(String id) {
-        Article exist = findById(id);
-        if (Objects.nonNull(exist)) {
-            articleRepository.deleteById(id);
-            return exist.getId();
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            article.setDeleted(Constant.IS_DELETED);
+            article.setUpdateTime(new Date());
+            articleRepository.saveAndFlush(article);
+            return article.getId();
         }
         return StringUtils.EMPTY;
     }
@@ -92,6 +96,7 @@ public class ArticleService {
             if (StringUtils.isNotBlank(category)) {
                 predicates.add(criteriaBuilder.equal(root.get("categoryId"), category));
             }
+            predicates.add(criteriaBuilder.equal(root.get("deleted"), Constant.NOT_DELETED));
             int size = predicates.size();
             return criteriaBuilder.and(predicates.toArray(new Predicate[size]));
         };
