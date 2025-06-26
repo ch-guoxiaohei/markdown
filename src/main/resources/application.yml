@@ -6,23 +6,20 @@ web:
   classpath: H:/code/markdown/
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: sa
-#    url: jdbc:h2:mem:h2test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    url: jdbc:h2:~/h2-markdown;SCHEMA=markdowneditor
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${user}
+    password: ${password}
+    #    url: jdbc:h2:~/h2-markdown;SCHEMA=markdowneditor
+    url: jdbc:mysql://localhost:3306/markdowneditor?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-  h2:
-    console:
-      enabled: true
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.classpath}

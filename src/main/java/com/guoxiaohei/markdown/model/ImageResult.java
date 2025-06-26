@@ -1,21 +1,57 @@
 package com.guoxiaohei.markdown.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * @author guoyupeng
  * @since 2021/11/24
  */
-@Builder
-@Data
-@ToString
 public class ImageResult {
 
-  private Integer success;
+    public ImageResult(Integer success, String message, String url) {
+        this.success = success;
+        this.message = message;
+        this.url = url;
+    }
 
-  private String message;
+    public ImageResult() {
+    }
 
-  private String url;
+    private Integer success;
+
+    private String message;
+
+    private String url;
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+
 }

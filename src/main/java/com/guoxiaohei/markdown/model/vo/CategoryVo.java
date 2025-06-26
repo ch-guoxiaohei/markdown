@@ -1,19 +1,41 @@
 package com.guoxiaohei.markdown.model.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@ToString
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 public class CategoryVo {
 
-  private String id;
+    public CategoryVo() {
+    }
 
-  private String name;
+    public CategoryVo(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    private String id;
+
+    private String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

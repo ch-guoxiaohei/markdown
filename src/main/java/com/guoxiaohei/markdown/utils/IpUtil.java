@@ -6,12 +6,12 @@ import java.net.UnknownHostException;
 
 public final class IpUtil {
 
-  private IpUtil() {
-  }
+    private IpUtil() {
+    }
 
-  public static String getIp() throws UnknownHostException {
-    InetAddress addr = InetAddress.getLocalHost();
-    return addr.getHostName();
-  }
+    public static String getIp() throws UnknownHostException {
+        InetAddress addr = InetAddress.getLocalHost();
+        return addr.getHostName();
+    }
 
 }
