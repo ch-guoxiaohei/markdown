@@ -9,7 +9,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${user}
     password: ${password}
-    #    url: jdbc:h2:~/h2-markdown;SCHEMA=markdowneditor
     url: jdbc:mysql://localhost:3306/markdowneditor?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
