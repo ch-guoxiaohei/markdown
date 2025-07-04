@@ -3,7 +3,7 @@ server:
   tomcat:
     basedir: tomcat
 web:
-  classpath: H:/code/markdown/
+  classpath: ${user.dir}
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

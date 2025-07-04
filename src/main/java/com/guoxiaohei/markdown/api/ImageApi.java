@@ -32,9 +32,6 @@ public class ImageApi {
     @Value("${server.port:8080}")
     private String port;
 
-    @Value("${web.classpath}")
-    private String rootPath;
-
 
     @PostMapping("upload")
     public ImageResult uploadImage(@RequestParam(value = "editormd-image-file") MultipartFile multipartFile, HttpServletRequest request) {
@@ -61,7 +58,7 @@ public class ImageApi {
         String extension = FilenameUtils.getExtension(originalFilename);
         String path = request.getServletContext().getRealPath("/");
         logger.info("web context path {} ", path);
-        path = rootPath;
+        path = System.getProperty("user.dir");
         String current = LocalDate.now().toString();
         String webPath = File.separator + Constant.UPLOAD_FOLDER + File.separator + current;
         path = path + webPath;
